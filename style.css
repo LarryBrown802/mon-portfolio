@@ -75,6 +75,25 @@ ul { list-style: none; }
     color: var(--bg-color) !important;
 }
 
+/* Cache le menu burger sur ordinateur */
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-main);
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Animations du burger quand il est cliqué */
+.burger.toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
+.burger.toggle .line2 { opacity: 0; }
+.burger.toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
+
 /* --- Hero Section --- */
 .hero {
     height: 100vh;
@@ -466,53 +485,46 @@ footer {
 
 /* --- NOUVEAUX BADGES (Style Logos Clairs) --- */
 
-/* Mini badges sur les cartes d'aperçu */
 .tech-badges-mini {
     display: flex;
-    gap: 10px; /* Espacement aéré */
+    gap: 10px;
     flex-wrap: wrap;
-    margin-top: auto; /* Pousse les badges vers le bas */
+    margin-top: auto;
 }
 
 .tech-badges-mini span {
     font-size: 0.8rem;
     font-family: var(--font-code);
-    /* Fond clair pour faire ressortir les logos */
     background: #ffffff;
-    /* Bordure subtile grise */
     border: 1px solid #e2e8f0;
-    color: #334155; /* Texte foncé pour le contraste */
+    color: #334155;
     padding: 6px 14px;
-    border-radius: 25px; /* Forme pilule */
+    border-radius: 25px;
     display: flex;
     align-items: center;
-    gap: 10px; /* Espace entre logo et texte */
+    gap: 10px;
     letter-spacing: 0.5px;
     transition: 0.3s all ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Ombre légère */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* Style de l'image logo dans le mini badge */
 .tech-badges-mini span img {
-    height: 20px; /* Taille fixe pour les logos */
+    height: 20px;
     width: auto;
     display: block;
 }
-/* Style pour les icônes FontAwesome restantes (pour les concepts) */
+
 .tech-badges-mini span i {
-    color: #64748b; /* Couleur gris-bleu foncé */
+    color: #64748b;
     font-size: 1rem;
 }
 
-/* Effet de survol */
 .tech-badges-mini span:hover {
     border-color: var(--accent-blue);
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 242, 255, 0.15);
 }
 
-
-/* Badges techniques dans la modale (plus gros) */
 .tech-stack-full {
     display: flex;
     flex-wrap: wrap;
@@ -536,9 +548,10 @@ footer {
 }
 
 .tech-badge img {
-    height: 24px; /* Logos un peu plus grands dans la modale */
+    height: 24px;
     width: auto;
 }
+
 .tech-badge i {
     color: #64748b;
     font-size: 1.2rem;
@@ -679,10 +692,70 @@ body.modal-open { overflow: hidden; }
 .vision h4 i { color: #2ed573; }
 .objective { border-color: var(--accent-purple); }
 
-/* Responsive pour la modale */
+
+/* =========================================
+   RESPONSIVE DESIGN (Mobiles & Tablettes)
+   ========================================= */
 @media (max-width: 768px) {
-    .detail-grid { grid-template-columns: 1fr; }
-    .modal-content { margin: 10px; max-height: 85vh; }
-    .modal-full-img { height: 180px; }
-    .skills-grid { grid-template-columns: 1fr; }
+    /* --- Général --- */
+    .section { padding: 60px 5%; }
+    .section-title { font-size: 1.5rem; margin-bottom: 30px; }
+
+    /* --- Menu Burger --- */
+    .burger { display: block; }
+    
+    .nav-links {
+        position: absolute;
+        right: -100%;
+        top: 70px;
+        flex-direction: column;
+        background: rgba(10, 11, 16, 0.98);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s ease-in-out;
+        padding: 20px 0;
+        gap: 20px;
+        box-shadow: 0 10px 10px rgba(0,0,0,0.3);
+    }
+
+    .nav-links.nav-active { right: 0; }
+
+    /* --- Hero Section --- */
+    .hero {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding: 100px 5% 50px 5%;
+    }
+    .hero-content { margin-bottom: 30px; }
+    .hero-visual { display: none; }
+    h1 { font-size: 2.2rem; }
+    .hero-btns { justify-content: center; flex-wrap: wrap; }
+
+    /* --- Grilles (Profil, Compétences, Projets) --- */
+    .about-grid, 
+    .skills-grid, 
+    .projects-grid, 
+    .detail-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .featured { grid-column: span 1; }
+
+    /* --- Modale --- */
+    .modal-content {
+        margin: 10px;
+        width: 95%;
+        max-height: 85vh;
+    }
+    .modal-header { padding: 20px; }
+    .modal-body { padding: 20px; }
+    .modal-full-img { height: 160px; margin-bottom: 15px; }
+    .modal-icon { font-size: 2rem; }
+    .modal-header h2 { font-size: 1.3rem; }
+
+    /* --- Ajustements des badges sur mobile --- */
+    .tech-badges-mini span { font-size: 0.7rem; padding: 5px 10px; }
+    .tech-badge { font-size: 0.8rem; padding: 6px 12px; }
 }

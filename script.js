@@ -1,3 +1,33 @@
+/* =========================================
+   MENU BURGER MOBILE
+   ========================================= */
+const burger = document.querySelector('.burger');
+const nav = document.querySelector('.nav-links');
+const navLinks = document.querySelectorAll('.nav-links li');
+
+// Vérifie si le burger existe (bonne pratique)
+if (burger) {
+    // Ouvre et ferme le menu au clic sur le burger
+    burger.addEventListener('click', () => {
+        nav.classList.toggle('nav-active');
+        burger.classList.toggle('toggle');
+    });
+}
+
+// Ferme le menu automatiquement quand on clique sur un lien
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        nav.classList.remove('nav-active');
+        if (burger) {
+            burger.classList.remove('toggle');
+        }
+    });
+});
+
+/* =========================================
+   ANIMATIONS ET SCROLL
+   ========================================= */
+
 // Smooth Scroll pour les ancres
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -23,14 +53,13 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // On cible tous les éléments qui doivent apparaître
-// Note : il faut ajouter un style initial dans le CSS pour que ça marche
-// Pour faire simple ici, on applique l'effet directement
 document.querySelectorAll('.project-card, .skill-category, .about-text').forEach(el => {
     el.style.opacity = "0";
     el.style.transform = "translateY(20px)";
     el.style.transition = "all 0.6s ease-out";
     observer.observe(el);
 });
+
 /* =========================================
    GESTION DES MODALES PROJETS
    ========================================= */
